@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { ErrorBoundary, LoginPage, Protected } from './pages';
+import { ErrorBoundary, LoginPage, Protected, UsersPage } from './pages';
 import { AuthProvider } from './providers';
 import { QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@mui/material';
@@ -19,11 +19,12 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <Protected>
-                    <Layout />
-                  </Protected>
+                  // <Protected>
+                  <Layout />
+                  // </Protected>
                 }
               >
+                <Route path="" element={<UsersPage />} />
                 {/* <Route path="" element={<InboxPage />} /> */}
               </Route>
               <Route path="/login" element={<LoginPage />} />

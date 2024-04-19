@@ -1,0 +1,24 @@
+.search_input {
+  height: 3rem;
+  outline: none;
+  font-size: 16px;
+  padding: 0 1rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border: 1px solid #bbbbbb;
+}
+
+.search_input:focus {
+  border: 2px solid #31b4e8;
+}
+
+.search_input::placeholder {
+  color: #bbbbbb;
+}
+
+.cancel_btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.7rem;
+  cursor: pointer;
+}

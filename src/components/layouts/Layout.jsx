@@ -2,7 +2,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks';
 import { useEffect } from 'react';
 import { Box } from '@mui/material';
-import Topbar from './Topbar';
 import { colors } from '../../assets/theme';
 
 export const Layout = () => {
@@ -22,7 +21,7 @@ export const Layout = () => {
 
   return (
     <Box bgcolor={colors.bgColor}>
-      <Topbar />
+      {/* <Topbar /> */}
       <Box>
         <Outlet />
       </Box>
