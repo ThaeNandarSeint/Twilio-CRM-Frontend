@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { ErrorBoundary, Protected } from './pages';
+import { ErrorBoundary, LoginPage, Protected } from './pages';
 import { AuthProvider } from './providers';
 import { QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@mui/material';
@@ -26,7 +26,7 @@ function App() {
               >
                 {/* <Route path="" element={<InboxPage />} /> */}
               </Route>
-              {/* <Route path="/login" element={<LoginPage />} /> */}
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
           </ThemeProvider>
         </QueryClientProvider>
