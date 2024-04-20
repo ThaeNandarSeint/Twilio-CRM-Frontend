@@ -3,3 +3,4 @@ export * from './Protected';
 export * from './Login';
 export * from './CreateAccountPage';
 export * from './AccountDetailPage';
+export * from './EditAccountPage';

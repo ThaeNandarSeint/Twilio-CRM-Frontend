@@ -11,7 +11,7 @@ const Item = ({ field, value }) => {
   );
 };
 
-export const AccountCoverage = () => {
+export const AccountCoverage = ({ user }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-paleBlue p-5 rounded-lg border flex gap-2 items-center justify-between font-semibold text-darkBlue">
@@ -32,20 +32,28 @@ export const AccountCoverage = () => {
       <div className="flex flex-col gap-3">
         <h1 className="text-xl font-bold">Coverage Preferences</h1>
         <div className="flex">
+          <Item field="Coverage Interests:" value={user?.coverageInterests} />
+          <Item field="Remains will be:" value={user?.remainsWillBe} />
           <Item
-            field="Coverage Interests:"
-            value="No coverage, needs help covering burial costs."
+            field="Desired Coverage Amount:"
+            value={user?.desiredCoverageAmount}
           />
-          <Item field="Remains will be:" value="Cremated" />
-          <Item field="Desired Coverage Amount:" value="$15,000" />
         </div>
       </div>
       <div className="flex flex-col gap-3">
         <h1 className="text-xl font-bold">Health Questions</h1>
         <div className="flex">
-          <Item field="Tobacco/nicotine in the past 12 months?" value="No" />
-          <Item field="Height:" value="5” 10’" />
-          <Item field="Weight:" value="180 lbs" />
+          <Item
+            field="Tobacco/nicotine in the past 12 months?"
+            value={user?.usedNicotine ? 'Yes' : 'No'}
+          />
+          <Item
+            field="Height:"
+            value={`${Math.ceil(user?.height?.value / 12)}' ${
+              user?.height?.value % 12
+            }"`}
+          />
+          <Item field="Weight:" value={`${user?.weight?.value} lbs`} />
         </div>
       </div>
       <div className="flex flex-col gap-3">

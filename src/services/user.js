@@ -1,17 +1,32 @@
-import { useMutation, useQuery } from 'react-query';
+import { useInfiniteQuery, useMutation, useQuery } from 'react-query';
 import { fetcher } from '../lib';
 import { getQueryString } from '../helpers';
 
-export const getAllUsers = async (params) => {
-  return fetcher.get(`/users?${getQueryString(params)}`).then((res) => {
-    return res.data;
-  });
+const getAllUsers = async ({ page, ...params }) => {
+  return fetcher
+    .get(
+      `/users?${getQueryString({
+        ...params,
+        skip: (page - 1) * 10,
+        limit: 10,
+      })}`
+    )
+    .then((res) => {
+      return res.data;
+    });
 };
 
 export const useGetAllUsers = (params) => {
-  return useQuery({
-    queryKey: ['users', params],
-    queryFn: () => getAllUsers(params),
+  return useInfiniteQuery({
+    queryKey: ['Users'],
+    queryFn: ({ pageParam = 1 }) => {
+      return getAllUsers({ page: pageParam, ...params });
+    },
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage =
+        lastPage?.data?.users?.length === 10 ? allPages.length + 1 : undefined;
+      return nextPage;
+    },
   });
 };
 
@@ -30,7 +45,7 @@ export const useGetUserDetail = (id) => {
 
 //
 const createUser = async (data) => {
-  return fetcher.post('/auth/register', data).then((res) => {
+  return fetcher.post('/users', data).then((res) => {
     return res.data;
   });
 };
@@ -53,26 +68,14 @@ export const useEditUser = () => {
   });
 };
 
-const editPassword = async (data) => {
-  return fetcher.patch('/auth/password', data).then((res) => {
+const deleteUser = async (id) => {
+  return fetcher.delete(`/users/${id}`, null).then((res) => {
     return res.data;
   });
 };
 
-export const useEditPassword = () => {
+export const useDeleteUser = () => {
   return useMutation({
-    mutationFn: editPassword,
-  });
-};
-
-const disableUser = async (id) => {
-  return fetcher.post(`/users/${id}/disable`, null).then((res) => {
-    return res.data;
-  });
-};
-
-export const useDisableUser = () => {
-  return useMutation({
-    mutationFn: disableUser,
+    mutationFn: deleteUser,
   });
 };

@@ -8,7 +8,13 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material';
-import { Cancel, Search, Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  Cancel,
+  ErrorOutline,
+  Search,
+  Visibility,
+  VisibilityOff,
+} from '@mui/icons-material';
 import { colors } from '../../assets/theme';
 import { useMultipleSelectWithCheckbox } from '../../hooks';
 
@@ -161,61 +167,90 @@ export const FormSelect = ({
   children,
   placeholder,
   name,
-  formProps: { values, handleChange },
+  error,
+  value,
+  formProps: { handleChange },
 }) => {
   return (
-    <select
-      onChange={handleChange}
-      name={name}
-      value={values[name]}
-      className={`bg-transparent border rounded w-[100%] outline-none focus:border-black-400 block p-1`}
-    >
-      <option value="" disabled selected>
-        {placeholder}
-      </option>
-      {children}
-    </select>
+    <div>
+      <select
+        onChange={handleChange}
+        name={name}
+        value={value}
+        className={`bg-transparent border rounded w-[100%] outline-none focus:border-black-400 block p-1`}
+      >
+        <option value="" disabled selected>
+          {placeholder}
+        </option>
+        {children}
+      </select>
+      {Boolean(error) && (
+        <span className="text-red-600 flex items-center gap-1">
+          <ErrorOutline />
+          Required
+        </span>
+      )}
+    </div>
   );
 };
 
 export const FormInputBox = ({
-  formProps: { values },
+  formProps: { handleChange },
   name,
   placeholder,
   type,
   disabled,
+  error,
+  value,
 }) => {
   return (
-    <input
-      type={type}
-      className={`bg-transparent border border-black rounded w-[100%] outline-none focus:border-black-400 block px-3 py-1`}
-      placeholder={placeholder}
-      name={name}
-      value={values[name]}
-      disabled={disabled}
-    />
+    <div>
+      <input
+        type={type}
+        className={`bg-transparent border border-black rounded w-[100%] outline-none focus:border-black-400 block px-3 py-1`}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        disabled={disabled}
+        onChange={handleChange}
+      />
+      {Boolean(error) && (
+        <span className="text-red-600 flex items-center gap-1">
+          <ErrorOutline />
+          Required
+        </span>
+      )}
+    </div>
   );
 };
 
 export const FormRadioButton = ({
   items,
   name,
-  formProps: { handleChange },
+  formProps: { handleChange, errors },
 }) => {
   return (
-    <div className="flex gap-2">
-      {items.map((item) => (
-        <div key={item.value} className="flex items-center">
-          <input
-            type="radio"
-            id={item.value}
-            name={name}
-            value={item.value}
-            onChange={handleChange}
-          />
-          <label htmlFor={item.value}>{item.text}</label>
-        </div>
-      ))}
+    <div>
+      <div className="flex gap-2">
+        {items.map((item) => (
+          <div key={item.value} className="flex items-center">
+            <input
+              type="radio"
+              id={item.value}
+              name={name}
+              value={item.value}
+              onChange={handleChange}
+            />
+            <label htmlFor={item.value}>{item.text}</label>
+          </div>
+        ))}
+      </div>
+      {Boolean(errors[name]) && (
+        <span className="text-red-600 flex items-center gap-1">
+          <ErrorOutline />
+          Required
+        </span>
+      )}
     </div>
   );
 };

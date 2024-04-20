@@ -2,10 +2,10 @@ import { ToastContainer } from 'react-toastify';
 import {
   AccountDetailPage,
   CreateAccountPage,
+  EditAccountPage,
   ErrorBoundary,
   LoginPage,
 } from './pages';
-import { AuthProvider } from './providers';
 import { QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
@@ -16,27 +16,19 @@ import { theme } from './assets/theme';
 function App() {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <ToastContainer />
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={theme}>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  // <Protected>
-                  <Layout />
-                  // </Protected>
-                }
-              >
-                <Route path="" element={<AccountDetailPage />} />
-                <Route path="create" element={<CreateAccountPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </ThemeProvider>
-        </QueryClientProvider>
-      </AuthProvider>
+      <ToastContainer />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/:id" element={<AccountDetailPage />} />
+              <Route path="" element={<CreateAccountPage />} />
+              <Route path="/:id/edit" element={<EditAccountPage />} />
+            </Route>
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </ThemeProvider>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }

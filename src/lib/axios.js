@@ -6,16 +6,16 @@ export const fetcher = axios.create({
 
 fetcher.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('access-token');
+    // const token = localStorage.getItem('access-token');
 
-    if (token !== null) {
-      config.headers.Authorization =
-        'Bearer ' + localStorage.getItem('access-token');
-    }
+    // if (token !== null) {
+    //   config.headers.Authorization =
+    //     'Bearer ' + localStorage.getItem('access-token');
+    // }
 
     return config;
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
