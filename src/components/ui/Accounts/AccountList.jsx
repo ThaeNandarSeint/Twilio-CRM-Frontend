@@ -1,7 +1,7 @@
 import { AddCircle, Search } from '@mui/icons-material';
 import { Avatar, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetAllUsers } from '../../../services/user';
 import { useInView } from 'react-intersection-observer';
 import moment from 'moment';
@@ -10,12 +10,16 @@ import { filterItems } from '../../../constants';
 
 // eslint-disable-next-line react/display-name
 const Item = React.forwardRef(({ user }, ref) => {
+  const { id } = useParams();
+
   const navigate = useNavigate();
   const userName = `${user?.name?.first} ${user?.name?.middle} ${user?.name?.last}`;
   const itemContent = (
     <div
       onClick={() => navigate(`/${user._id}`)}
-      className="flex items-center gap-3 bg-paleBlue px-3 py-4 border-l-blue border-2 cursor-pointer"
+      className={`flex items-center gap-3 px-3 py-4 border-2 cursor-pointer ${
+        id === user._id && 'bg-paleBlue border-l-blue'
+      }`}
     >
       <Avatar sx={{ bgcolor: '#6D2ED1' }} alt={userName} />
       <div>
