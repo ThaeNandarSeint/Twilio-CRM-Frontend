@@ -52,7 +52,7 @@ export const AccountForm = ({ oldData }) => {
       },
       {
         onSuccess: () => {
-          toast.success('ok');
+          toast.success('Created');
           queryClient.invalidateQueries(['users']);
         },
       }
@@ -89,7 +89,7 @@ export const AccountForm = ({ oldData }) => {
       },
       {
         onSuccess: () => {
-          toast.success('ok');
+          toast.success('Updated');
           queryClient.invalidateQueries(['users']);
         },
       }

@@ -8,11 +8,14 @@ import {
   WhatsApp,
 } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGetUserDetail } from '../../../services/user';
 
 export const AccountInformation = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+
+  const { data: user } = useGetUserDetail(id);
 
   return (
     <div className="p-3">
@@ -34,7 +37,9 @@ export const AccountInformation = () => {
           </div>
         </div>
         <div className="flex justify-between px-3 py-2">
-          <h1 className="text-2xl font-bold">Thae</h1>
+          {user?.data && (
+            <h1 className="text-2xl font-bold">{`${user?.data?.name?.first} ${user?.data?.name?.middle} ${user?.data?.name?.last}`}</h1>
+          )}
           <div className="flex gap-1">
             <div
               className="border-black border-2 rounded-2xl flex justify-center items-center "

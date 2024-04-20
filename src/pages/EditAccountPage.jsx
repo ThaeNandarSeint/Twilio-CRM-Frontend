@@ -12,10 +12,6 @@ export const EditAccountPage = () => {
   if (user?.data) {
     oldData = {
       ...user?.data,
-      height: {
-        feet: Math.ceil(user?.height?.value / 12),
-        inches: user?.height?.value % 12,
-      },
     };
   }
 

@@ -18,7 +18,7 @@ const getAllUsers = async ({ page, ...params }) => {
 
 export const useGetAllUsers = (params) => {
   return useInfiniteQuery({
-    queryKey: ['Users'],
+    queryKey: ['users'],
     queryFn: ({ pageParam = 1 }) => {
       return getAllUsers({ page: pageParam, ...params });
     },

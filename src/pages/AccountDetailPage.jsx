@@ -31,7 +31,7 @@ export const AccountDetailPage = () => {
   const handleDeleteUser = () => {
     deleteMutation(id, {
       onSuccess: () => {
-        toast.success('ok');
+        toast.success('Deleted');
         navigate('/');
       },
     });
