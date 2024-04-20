@@ -4,7 +4,6 @@ import {
   CreateAccountPage,
   EditAccountPage,
   ErrorBoundary,
-  LoginPage,
 } from './pages';
 import { QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@mui/material';
@@ -25,7 +24,6 @@ function App() {
               <Route path="" element={<CreateAccountPage />} />
               <Route path="/:id/edit" element={<EditAccountPage />} />
             </Route>
-            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </ThemeProvider>
       </QueryClientProvider>

@@ -20,8 +20,6 @@ import { queryClient } from '../../../lib';
 import { useState } from 'react';
 
 export const AccountForm = ({ oldData }) => {
-  console.log({ oldData });
-
   const [userType, setUserType] = useState();
 
   const { mutate: createMutation } = useCreateUser();
