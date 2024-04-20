@@ -1,11 +1,7 @@
-@font-face {
-  font-family: 'Poppins', sans-serif;
-  src: url('../src/assets/fonts/');
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.css-d9oaum-MuiSelect-select-MuiInputBase-input-MuiFilledInput-input.MuiSelect-select {
+  min-height: auto;
 }

@@ -98,3 +98,24 @@ export const TableActionButton = ({ userId }) => {
     </div>
   );
 };
+
+export const LinkButton = ({
+  innerText,
+  onClick,
+  variant,
+  color,
+  width,
+  icon,
+}) => {
+  return (
+    <Button
+      onClick={onClick}
+      className="no-underline"
+      variant={variant}
+      color={color}
+      sx={{ width }}
+    >
+      {innerText} {icon}
+    </Button>
+  );
+};

@@ -1,84 +1,55 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth, useDisclosure } from '../../hooks';
-import { useRef } from 'react';
-import { Avatar, Box, Menu, MenuItem, Typography } from '@mui/material';
+import {
+  ArrowDropDownOutlined,
+  Dialpad,
+  Forum,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
+import { Avatar, Menu, MenuItem } from '@mui/material';
 import { colors } from '../../assets/theme';
-import { ArrowDropDownOutlined } from '@mui/icons-material';
+import { useDisclosure } from '../../hooks';
+import { useRef } from 'react';
 
 export const Topbar = () => {
-  const navigate = useNavigate();
-
-  const { user, logout } = useAuth();
-
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const anchorEl = useRef();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const handleLogout = () => {};
 
   return (
-    <Box
-      sx={{
-        backgroundColor: colors.white[100],
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        m: 2,
-        borderRadius: '10px',
-        p: 1,
-      }}
-    >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        {/* <img
-          style={{
-            borderRight: `0.2px solid ${colors.grey[500]}`,
-            width: '70px',
-            objectFit: 'scale-down',
-            marginLeft: '.5rem',
-            paddingRight: '.5rem',
-          }}
-          src={ParamiLogo}
-          alt=""
-        /> */}
-        <Typography
-          sx={{ fontSize: '18px', fontWeight: 600, color: colors.black[200] }}
+    <div className="bg-darkBlue text-white px-3 py-2 flex justify-between">
+      <div className="flex gap-5">
+        <div className="cursor-pointer">
+          <MenuIcon sx={{ fontSize: '25px' }} />
+        </div>
+        <div className="bg-white text-black py-1 px-4">Logo</div>
+      </div>
+      <div className="flex gap-3 items-center">
+        <div>
+          <Dialpad />
+        </div>
+        <div>
+          <Forum />
+        </div>
+        <select
+          className={`bg-transparent border border-white rounded w-[100%] outline-none focus:border-black-400 block p-1`}
         >
-          Parami Hospital
-        </Typography>
-      </Box>
+          <option value="1">
+            <div className="bg-green w-2 h-2"></div>
+            Available | 10:27
+          </option>
+        </select>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderLeft: `0.2px solid ${colors.grey[500]}`,
-            pl: '10px',
-            cursor: 'pointer',
-          }}
-          id="basic-button"
-          aria-controls={isOpen ? 'basic-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={isOpen ? 'true' : undefined}
+        <div
+          className="flex items-center cursor-pointer"
           onClick={onOpen}
           ref={anchorEl}
         >
-          <Avatar sx={{ bgcolor: colors.paleBlue[800] }} alt={user.name} />
-          <Typography
-            sx={{
-              fontSize: '14px',
-              fontWeight: 400,
-              ml: 1,
-              color: colors.black[300],
-            }}
-          >
-            {user.email}
-          </Typography>
+          <Avatar
+            sx={{ bgcolor: colors.paleBlue[800], width: 28, height: 28 }}
+            alt={'h'}
+          />
           <ArrowDropDownOutlined />
-        </Box>
+        </div>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl.current}
@@ -92,7 +63,7 @@ export const Topbar = () => {
             Logout
           </MenuItem>
         </Menu>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };

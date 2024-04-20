@@ -3,6 +3,8 @@ import { useAuth } from '../../hooks';
 import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import { colors } from '../../assets/theme';
+import { Topbar } from './Topbar';
+import { Sidebar } from './Sidebar';
 
 export const Layout = () => {
   const { user } = useAuth();
@@ -20,11 +22,12 @@ export const Layout = () => {
   }, []);
 
   return (
-    <Box bgcolor={colors.bgColor}>
-      {/* <Topbar /> */}
-      <Box>
+    <Box>
+      <Topbar />
+      <div className="flex">
+        <Sidebar />
         <Outlet />
-      </Box>
+      </div>
     </Box>
   );
 };
